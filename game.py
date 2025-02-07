@@ -257,7 +257,11 @@ class Game:
 
                     # Check for blocking move
                     for i in range(3):
+                        if added:
+                            break
                         for j in range(3):
+                            if added:
+                                break
                             if self.is_empty((i, j)):
                                 self.add_element(self.other_symbol(), (i, j))
                                 if self.check_status(True) == f">> {self.other_symbol()} won!":
