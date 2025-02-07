@@ -1,4 +1,5 @@
 import os
+import sys
 from random import randint
 
 
@@ -452,7 +453,10 @@ class Game:
 
     @staticmethod
     def clear():
-        os.system('cls')
+        if "win" in sys.platform:
+            os.system("cls")
+        elif "linux" in sys.platform:
+            os.system("clear")
 
     def print_out(self):
         for line in self.game_table:
