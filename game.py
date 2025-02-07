@@ -10,6 +10,7 @@ class Game:
     player_turn = 0  # 0 for player with "X" and 1 for player with "O"
     x_controlled = 0  # 0 for player and 1 for CPU
     o_controlled = 0  # 0 for player and 1 for CPU
+    input_mode = 0  # 0 for index and 1 for numpad
     choice_list = {
         (0, 0): ((0, 1), (1, 1), (1, 0), (0, 2), (2, 2), (2, 0)),
         (0, 1): ((0, 0), (0, 2), (1, 1), (2, 1)),
@@ -298,8 +299,17 @@ class Game:
                 else:
                     # Player logic
                     print(f"Player {player_string} insert on position:")
-                    i = int(input("line = "))
-                    j = int(input("column = "))
+                    if Game.input_mode:
+                        while True:
+                            keypad = input("Keypad position: ")
+                            if keypad.isnumeric():
+                                keypad = int(keypad)
+                                break
+                        i = (keypad - 1) // 3
+                        j = (keypad - 1) % 3
+                    else:
+                        i = int(input("line = "))
+                        j = int(input("column = "))
                     self.add_element(player_string, [i, j])
                 break
             except ValueError:
@@ -410,6 +420,7 @@ class Game:
                     print(f"1 - Switch first player - current {"O" if Game.player_turn else "X"}")
                     print(f"2 - Toggle X (Player/CPU) - current {"CPU" if Game.x_controlled else "Player"}")
                     print(f"3 - Toggle O (Player/CPU) - current {"CPU" if Game.o_controlled else "Player"}")
+                    print(f"4 - Switch input mode - current {"by numpad" if Game.input_mode else "by index"}")
                     print()
                     print(f"0 - Back")
                     option = Game.read_menu_option(">> ")
@@ -432,6 +443,12 @@ class Game:
                             Game.o_controlled = 0
                         else:
                             Game.o_controlled += 1
+                    elif option == 4:
+                        # Toggle input mode
+                        if Game.input_mode:
+                            Game.input_mode = 0
+                        else:
+                            Game.input_mode = 1
                     elif option == 0:
                         # Back
                         option = -1
