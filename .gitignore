@@ -1,6 +1,3 @@
-# ignore file I stored keys in
-api_keys.py
-
 # ignore tests
 test*.*
 
