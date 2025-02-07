@@ -420,7 +420,7 @@ class Game:
                     print(f"1 - Switch first player - current {"O" if Game.player_turn else "X"}")
                     print(f"2 - Toggle X (Player/CPU) - current {"CPU" if Game.x_controlled else "Player"}")
                     print(f"3 - Toggle O (Player/CPU) - current {"CPU" if Game.o_controlled else "Player"}")
-                    print(f"4 - Switch input mode - current {"by numpad" if Game.input_mode else "by index"}")
+                    print(f"4 - Switch input mode - current {"by keypad" if Game.input_mode else "by index"}")
                     print()
                     print(f"0 - Back")
                     option = Game.read_menu_option(">> ")
